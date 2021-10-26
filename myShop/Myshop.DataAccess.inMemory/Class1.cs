@@ -8,5 +8,6 @@ namespace Myshop.DataAccess.inMemory
 {
     public class Class1
     {
+
     }
 }
