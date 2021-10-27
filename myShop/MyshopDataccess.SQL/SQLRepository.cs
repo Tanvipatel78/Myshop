@@ -31,7 +31,11 @@ namespace MyshopDataccess.SQL
 
         public void Delete(string Id)
         {
-            throw new NotImplementedException();
+            var t = Find(Id);
+            if (context.Entry(t).State == EntityState.Detached)
+                dbset.Attach(t);
+
+            dbset.Remove(t);
         }
 
         public T Find(string Id)
@@ -46,7 +50,8 @@ namespace MyshopDataccess.SQL
 
         public void Update(T t)
         {
-            throw new NotImplementedException();
+            dbset.Attach(t);
+            context.Entry(t).State = EntityState.Modified;
         }
     }
 }
