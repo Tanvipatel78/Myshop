@@ -170,6 +170,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductCategoryManagerController.cs" />
+    <Compile Include="Controllers\ProductManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -235,9 +237,18 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\ProductManager\Index.cshtml" />
+    <Content Include="Views\ProductManager\create.cshtml" />
+    <Content Include="Views\ProductManager\Edit.cshtml" />
+    <Content Include="Views\ProductManager\Delete.cshtml" />
+    <Content Include="Views\ProductCategoryManager\Index.cshtml" />
+    <Content Include="Views\ProductCategoryManager\Create.cshtml" />
+    <Content Include="Views\ProductCategoryManager\Edit.cshtml" />
+    <Content Include="Views\ProductCategoryManager\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ProductCategory\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -251,6 +262,24 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Myshop.core\Myshop.core.csproj">
+      <Project>{7216bfdc-8602-4aa6-9e20-808637f0e057}</Project>
+      <Name>Myshop.core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Myshop.DataAccess.inMemory\Myshop.DataAccess.InMemory.csproj">
+      <Project>{588b6ddc-64b7-4205-9e82-612fe788cd95}</Project>
+      <Name>Myshop.DataAccess.InMemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Myshop.services\Myshop.services.csproj">
+      <Project>{20c247be-0033-448b-b202-f91f305e752e}</Project>
+      <Name>Myshop.services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyshopDataccess.SQL\MyshopDatAccess.SQL.csproj">
+      <Project>{4e56fd94-38c0-4bec-be72-e93b2dc3edfd}</Project>
+      <Name>MyshopDatAccess.SQL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
