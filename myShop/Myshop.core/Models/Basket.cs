@@ -9,6 +9,7 @@ namespace Myshop.core.Models
     public class Basket : BaseEntity
     {
         public virtual ICollection<BasketItem> BasketItems { get; set; }
+        public int Quantity { get; set; }
 
         public Basket()
         {

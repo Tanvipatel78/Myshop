@@ -53,11 +53,5 @@
     <Compile Include="ViewModels\ProductListViewModel.cs" />
     <Compile Include="ViewModels\ProductManagerViewModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Myshop.services\Myshop.services.csproj">
-      <Project>{20c247be-0033-448b-b202-f91f305e752e}</Project>
-      <Name>Myshop.services</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
