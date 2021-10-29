@@ -30,9 +30,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            <img class="img-thumbnail" style="height:50px" src="~/Content/ProductImages/@item.Image" />
+            <img class="img-thumbnail" style="height:50px" src="@Url.Content("~/Content/ProductImages/"+item.Image+"")" />
         </td>
         <td>
+            @item.Image
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
@@ -46,7 +47,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-           @* @Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
