@@ -94,6 +94,7 @@ namespace MyShop.WebUI.Controllers
                     file.SaveAs(Server.MapPath("//Content//Productimages//") + product.Image);
                 }
 
+                productToEdit.Image = product.Image;
                 productToEdit.Category = product.Category;
                 productToEdit.Description = product.Description;
                 productToEdit.Name = product.Name;
