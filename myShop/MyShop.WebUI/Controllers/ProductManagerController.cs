@@ -93,7 +93,7 @@ namespace MyShop.WebUI.Controllers
                     product.Image = product.Id + Path.GetExtension(file.FileName);
                     file.SaveAs(Server.MapPath("//Content//Productimages//") + product.Image);
                 }
-                productToEdit.Image = product.Image;
+
                 productToEdit.Category = product.Category;
                 productToEdit.Description = product.Description;
                 productToEdit.Name = product.Name;
