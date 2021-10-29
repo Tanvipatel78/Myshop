@@ -64,6 +64,10 @@
     <Compile Include="Migrations\202110281145280_Pending_DB_Changes.Designer.cs">
       <DependentUpon>202110281145280_Pending_DB_Changes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110291118586_AddCustomers.cs" />
+    <Compile Include="Migrations\202110291118586_AddCustomers.Designer.cs">
+      <DependentUpon>202110291118586_AddCustomers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110281145280_Pending_DB_Changes.resx">
       <DependentUpon>202110281145280_Pending_DB_Changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110291118586_AddCustomers.resx">
+      <DependentUpon>202110291118586_AddCustomers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,6 +9,31 @@ namespace MyShop.WebUI.Tests.Mocks
 {
     public class MockHttpContext : HttpContextBase
     {
+        private MockRequest request;
+        private MockRepsonse response;
+        private HttpCookieCollection cookies;
+
+        public MockHttpContext()
+        {
+            cookies = new HttpCookieCollection();
+            this.request = new MockRequest(cookies);
+            this.response = new MockRepsonse(cookies);
+        }
+
+        public override HttpRequestBase Request
+        {
+            get
+            {
+                return request;
+            }
+        }
+        public override HttpResponseBase Response
+        {
+            get
+            {
+                return response;
+            }
+        }
 
     }
 
@@ -27,6 +52,24 @@ namespace MyShop.WebUI.Tests.Mocks
             {
                 return cookies;
             }
+        }
+    }
+}
+
+public class MockRequest : HttpRequestBase
+{
+    private readonly HttpCookieCollection cookies;
+
+    public MockRequest(HttpCookieCollection cookies)
+    {
+        this.cookies = cookies;
+    }
+
+    public override HttpCookieCollection Cookies
+    {
+        get
+        {
+            return cookies;
         }
     }
 }
