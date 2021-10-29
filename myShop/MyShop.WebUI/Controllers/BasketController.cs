@@ -16,7 +16,7 @@ namespace MyShop.WebUI.Controllers
             this.basketService = BasketService;
         }
         // GET: Basket
-        public ActionResult Index()
+        public ActionResult Index()  
         {
             var model = basketService.GetBasketItems(this.HttpContext);
             return View(model);
