@@ -11,16 +11,18 @@ namespace MyShop.WebUI.Controllers
 {
     public class BasketController : Controller
     {
+        IRepository<Customer> Customers;
         IBasketService basketService;
         IOrderService orderService;
 
-        public BasketController(IBasketService BasketService , IOrderService OrderService)
+        public BasketController(IBasketService BasketService, IOrderService OrderService, IRepository<Customer> Customers)
         {
             this.basketService = BasketService;
             this.orderService = OrderService;
+            this.Customers = Customers;
         }
         // GET: Basket
-        public ActionResult Index()  
+        public ActionResult Index()
         {
             var model = basketService.GetBasketItems(this.HttpContext);
             return View(model);
@@ -29,7 +31,7 @@ namespace MyShop.WebUI.Controllers
         public ActionResult AddToBasket(string Id)
         {
             basketService.AddToBasket(this.HttpContext, Id);
-            return RedirectToAction("Index");  
+            return RedirectToAction("Index");
         }
         public ActionResult RemoveFromBasket(string Id)
         {
@@ -43,22 +45,42 @@ namespace MyShop.WebUI.Controllers
 
             return PartialView(basketSummary);
         }
-
+        [Authorize]
         public ActionResult CheckOut()
         {
-            return View();
+            Customer customer = Customers.Collection().FirstOrDefault(c => c.Email == User.Identity.Name);
+            if(customer != null)
+            {
+                Order order = new Order()
+                {
+                    Email = customer.Email,
+                    City = customer.City,
+                    State = customer.State,
+                    Street = customer.Street,
+                    FirstName = customer.FirstName,
+                    SurName = customer.LastName,
+                    ZipCode = customer.ZipCode
+                };
+                return View(order);
+            }
+           else
+            {
+                return RedirectToAction("Error");
+            }
         }
         [HttpPost]
+        [Authorize]
         public ActionResult CheckOut(Order order)
         {
             var basketItems = basketService.GetBasketItems(this.HttpContext);
             order.OrderStatus = "Order Created";
+            order.Email = User.Identity.Name;
 
             //Process payment
             order.OrderStatus = "payment Processed";
             orderService.CreateOrder(order, basketItems);
             basketService.ClearBasket(this.HttpContext);
-            return RedirectToAction("ThankYou",new { OrderId = order.Id});
+            return RedirectToAction("ThankYou", new { OrderId = order.Id });
         }
 
         public ActionResult ThankYou(string OrderId)
