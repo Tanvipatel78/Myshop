@@ -5,6 +5,8 @@
 }
 
 <h2>Basket</h2>
+<a href="Home">Back to Shopping</a>
+<th></th>
 
 <table class="table">
     <tr>
@@ -39,9 +41,9 @@
             <td>
                 @String.Format("{0:c}", item.Price * item.Quantity)
             </td>
-            <td>
+            @*<td>
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+            </td>*@
             <td>
                 <a href="@Url.Action("RemoveFromBasket" , "Basket" , new { Id=item.Id})" class="btn btn-danger">Delete</a>
             </td>
@@ -51,6 +53,9 @@
             <td colspan="4" style="text-align:right"><strong>Basket Total</strong></td>
             <td>
                 @String.Format("{0:c}", (from p in Model select p.Price * p.Quantity).Sum())
+            </td>
+            <td>
+                <a href="@Url.Action("CheckOut","Basket")">Checkout</a>
             </td>
         </tr>
 </table>
