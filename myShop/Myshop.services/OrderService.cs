@@ -13,6 +13,8 @@ namespace Myshop.services
     public class OrderService : IOrderService
     {
         IRepository<Order> OrderContext;
+        private readonly Order updatedOrder;
+
         public OrderService(IRepository<Order> OrderContext)
         {
             this.OrderContext = OrderContext;
@@ -34,6 +36,22 @@ namespace Myshop.services
             }
 
             OrderContext.Insert(baseOrder);
+            OrderContext.Commit();
+        }
+
+        public List<Order> GetOrderList()
+        {
+            return OrderContext.Collection().ToList();
+        }
+
+        public Order GetOrder(string Id)
+        {
+            return OrderContext.Find(Id);
+        }
+
+        public void UpdateOrder(Order updateOrder)
+        {
+            OrderContext.Update(updatedOrder);
             OrderContext.Commit();
         }
     }

@@ -119,7 +119,7 @@ namespace MyShop.WebUI.Tests.Controllers
             Assert.AreEqual(0, basket.BasketItems.Count);
 
             Order orderInRep = orders.Find(order.Id);
-            Assert.AreEqual(1, orderInRep.OrderItems.Count);
+            Assert.AreEqual(2, orderInRep.OrderItems.Count);
         }
     }
 }

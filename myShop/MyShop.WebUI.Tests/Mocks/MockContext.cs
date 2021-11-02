@@ -71,5 +71,10 @@ namespace MyShop.WebUI.Tests.Mocks
                 throw new Exception(className + "Not Found");
             }
         }
+
+        public void Update(object updatedOrder)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

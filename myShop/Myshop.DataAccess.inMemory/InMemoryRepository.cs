@@ -78,5 +78,10 @@ namespace Myshop.DataAccess.inMemory
                 throw new Exception(className + "Not Found");
             }
         }
+
+        public void Update(object updatedOrder)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
