@@ -54,7 +54,7 @@ namespace MyshopDataccess.SQL
             context.Entry(t).State = EntityState.Modified;
         }
 
-        public void Update(object updatedOrder)
+        public void Update(object UpdatedOrder)
         {
             throw new NotImplementedException();
         }

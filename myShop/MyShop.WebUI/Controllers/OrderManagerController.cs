@@ -8,37 +8,39 @@ using System.Web.Mvc;
 
 namespace MyShop.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class OrderManagerController : Controller
     {
-        IOrderService OrderService;
+        IOrderService orderService;
 
         public OrderManagerController(IOrderService OrderService)
         {
-            this.OrderService = OrderService;
+            this.orderService = OrderService;
         }
         // GET: OrderManager
         public ActionResult Index()
         {
-            List<Order> Orders = OrderService.GetOrderList();
+            List<Order> Orders = orderService.GetOrderList();
             return View(Orders);
         }
         public ActionResult UpdateOrder(string Id)
         {
-            ViewBag.statusList = new List<string>()
+            ViewBag.StatusList = new List<string>()
             {
                 "Order Created",
                 "Payment processed",
                 "Order Shipped",
                 "Order Complete"
         };
-            Order Order = OrderService.GetOrder(Id);
+            Order Order = orderService.GetOrder(Id);
             return View(Order);
         }
+        [HttpPost]
         public ActionResult UpdateOrder(Order updateOrder , string Id)
         {
-            Order order = OrderService.GetOrder(Id);
+            Order order = orderService.GetOrder(Id);
             order.OrderStatus = updateOrder.OrderStatus;
-            OrderService.UpdateOrder(order);
+            orderService.UpdateOrder(order);
 
             return RedirectToAction("Index");
         }

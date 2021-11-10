@@ -14,9 +14,9 @@
         <th>
             @Html.DisplayNameFor(model => model.OrderStatus)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.CreatAt)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -35,9 +35,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.OrderStatus)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.CreatAt)
-            </td>
+            </td>*@
             <td>
                 @Html.ActionLink("Manage Order", "UpdateOrder", new { id = item.Id }) |
             </td>

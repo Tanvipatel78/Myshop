@@ -13,7 +13,7 @@ namespace Myshop.services
     public class OrderService : IOrderService
     {
         IRepository<Order> OrderContext;
-        private readonly Order updatedOrder;
+        private readonly Order UpdatedOrder;
 
         public OrderService(IRepository<Order> OrderContext)
         {
@@ -51,7 +51,7 @@ namespace Myshop.services
 
         public void UpdateOrder(Order updateOrder)
         {
-            OrderContext.Update(updatedOrder);
+            OrderContext.Update(UpdatedOrder);
             OrderContext.Commit();
         }
     }
