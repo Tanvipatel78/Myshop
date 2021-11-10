@@ -50,8 +50,16 @@ namespace MyshopDataccess.SQL
 
         public void Update(T t)
         {
-            dbset.Attach(t);
-            context.Entry(t).State = EntityState.Modified;
+            try
+            {
+                dbset.Attach(t);
+                context.Entry(t).State = EntityState.Modified;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public void Update(object UpdatedOrder)

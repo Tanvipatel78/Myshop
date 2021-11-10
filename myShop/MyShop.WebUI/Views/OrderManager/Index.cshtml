@@ -3,6 +3,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.CreatAt)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
@@ -22,25 +25,28 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SurName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderStatus)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.CreatAt)
-            </td>*@
-            <td>
-                @Html.ActionLink("Manage Order", "UpdateOrder", new { id = item.Id }) |
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SurName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderStatus)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.CreatAt)
+        </td>*@
+        <td>
+            @Html.ActionLink("Manage Order", "UpdateOrder", new { id = item.Id }) |
+        </td>
+    </tr>
     }
 </table>

@@ -51,7 +51,7 @@ namespace Myshop.services
 
         public void UpdateOrder(Order updateOrder)
         {
-            OrderContext.Update(UpdatedOrder);
+            OrderContext.Update(updateOrder);
             OrderContext.Commit();
         }
     }
