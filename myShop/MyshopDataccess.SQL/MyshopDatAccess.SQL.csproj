@@ -72,6 +72,22 @@
     <Compile Include="Migrations\202111010747194_AddedOrders.Designer.cs">
       <DependentUpon>202111010747194_AddedOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111110612022_UpdatedateFailed.cs" />
+    <Compile Include="Migrations\202111110612022_UpdatedateFailed.Designer.cs">
+      <DependentUpon>202111110612022_UpdatedateFailed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111110951477_UpdatedateFailed1.cs" />
+    <Compile Include="Migrations\202111110951477_UpdatedateFailed1.Designer.cs">
+      <DependentUpon>202111110951477_UpdatedateFailed1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111111012066_UpdatedateFailed2.cs" />
+    <Compile Include="Migrations\202111111012066_UpdatedateFailed2.Designer.cs">
+      <DependentUpon>202111111012066_UpdatedateFailed2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111111038325_UpdatedateFailed3.cs" />
+    <Compile Include="Migrations\202111111038325_UpdatedateFailed3.Designer.cs">
+      <DependentUpon>202111111038325_UpdatedateFailed3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -101,6 +117,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111010747194_AddedOrders.resx">
       <DependentUpon>202111010747194_AddedOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111110612022_UpdatedateFailed.resx">
+      <DependentUpon>202111110612022_UpdatedateFailed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111110951477_UpdatedateFailed1.resx">
+      <DependentUpon>202111110951477_UpdatedateFailed1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111111012066_UpdatedateFailed2.resx">
+      <DependentUpon>202111111012066_UpdatedateFailed2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111111038325_UpdatedateFailed3.resx">
+      <DependentUpon>202111111038325_UpdatedateFailed3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

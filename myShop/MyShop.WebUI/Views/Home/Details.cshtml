@@ -11,8 +11,6 @@
         <img class="img-responsive" src="~/Content/Productimages/@Model.Image" />
         <div class="col-md-10">
             <dl class="dl-horizontal">
-
-
                 <dt>
                     @Html.DisplayNameFor(model => model.Description)
                 </dt>
@@ -30,9 +28,12 @@
                 </dd>
 
                 <dt></dt>
-                <dd><a href="@Url.Action("AddToBasket" , "Basket" , new { Id=Model.Id})" class="btn btn-default">Add to Basket</a></dd>
-
-                <dd>@Html.ActionLink("Back to List", "Index")</dd>
+                <span> &nbsp; &nbsp; &nbsp;</span>
+                <dd><a href="@Url.Action("AddToBasket" , "Basket" , new { Id=Model.Id})" class="btn btn-danger">Add to Basket</a> </dd>
+                <span> &nbsp; &nbsp; &nbsp;</span>
+                <span> &nbsp; &nbsp; &nbsp;</span>
+                <dd><a href="@Url.Action("Index" , "Home" , new { Id=Model.Id})" class="btn btn-danger">Continue Shopping</a></dd>
+                <dd>@*@Html.ActionLink("Continue Shopping", "Index")*@</dd>
             </dl>
         </div>
     </div>

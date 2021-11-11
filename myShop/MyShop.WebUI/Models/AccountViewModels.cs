@@ -5,7 +5,7 @@ namespace MyShop.WebUI.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email required")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -25,10 +25,10 @@ namespace MyShop.WebUI.Models
 
     public class VerifyCodeViewModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Provider required")]
         public string Provider { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Coder required")]
         [Display(Name = "Code")]
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
@@ -41,19 +41,19 @@ namespace MyShop.WebUI.Models
 
     public class ForgotViewModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email required")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email required")]
         [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Password required")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -64,43 +64,51 @@ namespace MyShop.WebUI.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email required")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Password required")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Confirmpassword required")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "FirstName required")]
+        [StringLength(15, MinimumLength = 3)]
         public string FirstName { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "LastName required")]
+        [StringLength(15, MinimumLength = 3)]
         public string LastName { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Street required")]
+        [MaxLength(20)]
         public string Street { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "City required")]
+        [StringLength(30)]
         public string City { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "State required")]
+        [StringLength(30)]
         public string State { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "ZipCode required")]
+        [RegularExpression(@"^\d{6}(-\d{5})?$", ErrorMessage = "Invalid ZipCode")]
         public string ZipCode { get; set; }
     }
 
     public class ResetPasswordViewModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email required")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Password required")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -116,7 +124,7 @@ namespace MyShop.WebUI.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email required")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

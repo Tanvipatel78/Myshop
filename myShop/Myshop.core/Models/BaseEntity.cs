@@ -9,7 +9,7 @@ namespace Myshop.core.Models
     public abstract class BaseEntity
     {
         public string Id { get; set; }
-        public DateTimeOffset CreatAt { get; set; }
+        public DateTime CreatAt { get; set; }
 
         public BaseEntity()
         {

@@ -38,6 +38,7 @@ namespace MyShop.WebUI.Controllers
             basketService.RemoveFromBasket(this.HttpContext, Id);
             return RedirectToAction("Index");
         }
+        
 
         public PartialViewResult BasketSummary()
         {
@@ -65,7 +66,8 @@ namespace MyShop.WebUI.Controllers
             }
            else
             {
-                return RedirectToAction("Error");
+                return View(new Order());
+                //return RedirectToAction("Error");
             }
         }
         [HttpPost]
@@ -86,6 +88,11 @@ namespace MyShop.WebUI.Controllers
         public ActionResult ThankYou(string OrderId)
         {
             ViewBag.OrderId = OrderId;
+            return View();
+        }
+        public ActionResult Error(string OrderId)
+        {
+            //ViewBag.OrderId = OrderId;
             return View();
         }
     }

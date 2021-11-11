@@ -186,6 +186,7 @@
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MyOrderController.cs" />
     <Compile Include="Controllers\OrderManagerController.cs" />
     <Compile Include="Controllers\ProductCategoryManagerController.cs" />
     <Compile Include="Controllers\ProductManagerController.cs" />
@@ -220,7 +221,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -271,11 +274,12 @@
     <Content Include="Views\OrderManager\Index.cshtml" />
     <Content Include="Views\OrderManager\UpdateOrder.cshtml" />
     <Content Include="Views\OrderManager\OrderItems.cshtml" />
+    <Content Include="Views\Basket\OrderItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Productimages\" />
-    <Folder Include="Views\ProductCategory\" />
+    <Folder Include="Views\MyOrder\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

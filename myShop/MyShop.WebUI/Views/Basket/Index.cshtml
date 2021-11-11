@@ -5,7 +5,6 @@
 }
 
 <h2>Basket</h2>
-<a href="Home">Back to Shopping</a>
 <th></th>
 
 <table class="table">
@@ -41,9 +40,6 @@
             <td>
                 @String.Format("{0:c}", item.Price * item.Quantity)
             </td>
-            @*<td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>*@
             <td>
                 <a href="@Url.Action("RemoveFromBasket" , "Basket" , new { Id=item.Id})" class="btn btn-danger">Delete</a>
             </td>
@@ -59,3 +55,5 @@
             </td>
         </tr>
 </table>
+
+<a href="Home">Back to Shopping</a>

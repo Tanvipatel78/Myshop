@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace Myshop.core.Models
         {
             this.OrderItems = new List<OrderItem>();
         }
+       
         public string FirstName { get; set; }
         public string SurName { get; set; }
         public string Email { get; set; }
@@ -20,6 +22,6 @@ namespace Myshop.core.Models
         public string State { get; set; }
         public string ZipCode { get; set; }
         public string OrderStatus { get; set; }
-        public virtual ICollection<OrderItem>  OrderItems{ get; set; }
+        public virtual ICollection<OrderItem> OrderItems{ get; set; }
     }
 }
