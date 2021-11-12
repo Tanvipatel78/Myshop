@@ -5,29 +5,33 @@
 }
 
 <h2>Basket</h2>
+
 <th></th>
 
-<table class="table">
-    <tr>
-        <th></th>
-        @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            Line Total
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+@if ((from p in Model select p.Price * p.Quantity).Sum() != 0)
+{
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                Line Total
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
         <tr>
             <td><img style="height:50px" class="img" src="~/Content/Productimages/@item.Image" /></td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
             </td>
@@ -41,19 +45,25 @@
                 @String.Format("{0:c}", item.Price * item.Quantity)
             </td>
             <td>
-                <a href="@Url.Action("RemoveFromBasket" , "Basket" , new { Id=item.Id})" class="btn btn-danger">Delete</a>
+                <a href="@Url.Action("RemoveFromBasket", "Basket", new { Id = item.Id })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete??')">Delete</a>
             </td>
         </tr>
-    }
+        }
         <tr>
             <td colspan="4" style="text-align:right"><strong>Basket Total</strong></td>
             <td>
                 @String.Format("{0:c}", (from p in Model select p.Price * p.Quantity).Sum())
             </td>
             <td>
-                <a href="@Url.Action("CheckOut","Basket")">Checkout</a>
+                <a href="@Url.Action("CheckOut", "Basket")">Checkout</a>
             </td>
         </tr>
-</table>
-
-<a href="Home">Back to Shopping</a>
+    </table>
+    <a href="Home">Back to Shopping</a>
+}
+else
+{
+    <h2>@*There is nothing in your cart!!*@</h2>
+    <Script>alert("There is Nothing in your cart!!")</Script>
+    <a href="Home">Back to Shopping</a>
+}

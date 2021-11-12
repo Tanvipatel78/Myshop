@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Myshop.core.Contracts;
+using Myshop.core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +10,17 @@ namespace MyShop.WebUI.Controllers
 {
     public class MyOrderController : Controller
     {
-        // GET: MyOrder
-        public ActionResult MyorderDetails()
+        IOrderService orderService;
+
+        public MyOrderController(IOrderService OrderService)
         {
-            return View();
+            this.orderService = OrderService;
+        }
+        // GET: OrderManager
+        public ActionResult Index()
+        {
+            List<Order> Orders = orderService.GetOrderList();
+            return View(Orders);
         }
     }
 }

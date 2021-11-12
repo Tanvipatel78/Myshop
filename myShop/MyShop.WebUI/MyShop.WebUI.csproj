@@ -275,11 +275,12 @@
     <Content Include="Views\OrderManager\UpdateOrder.cshtml" />
     <Content Include="Views\OrderManager\OrderItems.cshtml" />
     <Content Include="Views\Basket\OrderItems.cshtml" />
+    <Content Include="Views\Basket\RemoveFromBasket.cshtml" />
+    <Content Include="Views\MyOrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Productimages\" />
-    <Folder Include="Views\MyOrder\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

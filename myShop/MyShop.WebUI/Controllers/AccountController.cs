@@ -418,6 +418,14 @@ namespace MyShop.WebUI.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult getUserName()
+        {
+            var userData = customerRepository.Collection().ToList().Where(p => p.Email == User.Identity.GetUserName()).FirstOrDefault();
+            string userName ="Hello " + userData.FirstName + ' ' + userData.LastName;
+            return Json(userName, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

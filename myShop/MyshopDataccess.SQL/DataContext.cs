@@ -1,4 +1,5 @@
 ﻿using Myshop.core.Models;
+using Myshop.core.ViewModels;
 using Myshop.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace MyshopDataccess.SQL
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-
+        //public DbSet<MyOrderDetails> MyOrderDetails { get; set; }
 
 
 

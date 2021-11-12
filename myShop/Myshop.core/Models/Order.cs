@@ -23,5 +23,6 @@ namespace Myshop.core.Models
         public string ZipCode { get; set; }
         public string OrderStatus { get; set; }
         public virtual ICollection<OrderItem> OrderItems{ get; set; }
+        public IList<BasketItem> BasketItems{ get; set; }
     }
 }

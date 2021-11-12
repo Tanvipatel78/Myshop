@@ -4,6 +4,8 @@ using Myshop.services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,6 +16,7 @@ namespace MyShop.WebUI.Controllers
         IRepository<Customer> Customers;
         IBasketService basketService;
         IOrderService orderService;
+        private object shop;
 
         public BasketController(IBasketService BasketService, IOrderService OrderService, IRepository<Customer> Customers)
         {
@@ -38,7 +41,6 @@ namespace MyShop.WebUI.Controllers
             basketService.RemoveFromBasket(this.HttpContext, Id);
             return RedirectToAction("Index");
         }
-        
 
         public PartialViewResult BasketSummary()
         {
@@ -47,7 +49,7 @@ namespace MyShop.WebUI.Controllers
             return PartialView(basketSummary);
         }
         [Authorize]
-        public ActionResult CheckOut()
+        public ActionResult CheckOut(int id)
         {
             Customer customer = Customers.Collection().FirstOrDefault(c => c.Email == User.Identity.Name);
             if(customer != null)
@@ -62,6 +64,8 @@ namespace MyShop.WebUI.Controllers
                     SurName = customer.LastName,
                     ZipCode = customer.ZipCode
                 };
+
+                //order.BasketItems = basketService.GetBasketItemsDb(id);
                 return View(order);
             }
            else

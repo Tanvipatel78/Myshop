@@ -41,5 +41,7 @@ namespace MyShop.WebUI.Models
         public System.Data.Entity.DbSet<Myshop.core.Models.OrderItem> OrderItems { get; set; }
 
         public System.Data.Entity.DbSet<Myshop.core.Models.Basket> Baskets { get; set; }
+
+        public System.Data.Entity.DbSet<Myshop.core.Models.MyOrderDetails> MyOrderDetails { get; set; }
     }
 }

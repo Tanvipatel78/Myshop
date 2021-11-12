@@ -88,6 +88,18 @@
     <Compile Include="Migrations\202111111038325_UpdatedateFailed3.Designer.cs">
       <DependentUpon>202111111038325_UpdatedateFailed3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111120616275_AddOrderDetails.cs" />
+    <Compile Include="Migrations\202111120616275_AddOrderDetails.Designer.cs">
+      <DependentUpon>202111120616275_AddOrderDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111121104449_UpdateUsername.cs" />
+    <Compile Include="Migrations\202111121104449_UpdateUsername.Designer.cs">
+      <DependentUpon>202111121104449_UpdateUsername.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111121225036_AddUserOrderList.cs" />
+    <Compile Include="Migrations\202111121225036_AddUserOrderList.Designer.cs">
+      <DependentUpon>202111121225036_AddUserOrderList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -129,6 +141,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111111038325_UpdatedateFailed3.resx">
       <DependentUpon>202111111038325_UpdatedateFailed3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111120616275_AddOrderDetails.resx">
+      <DependentUpon>202111120616275_AddOrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111121104449_UpdateUsername.resx">
+      <DependentUpon>202111121104449_UpdateUsername.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111121225036_AddUserOrderList.resx">
+      <DependentUpon>202111121225036_AddUserOrderList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

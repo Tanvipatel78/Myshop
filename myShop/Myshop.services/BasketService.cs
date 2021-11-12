@@ -160,6 +160,18 @@ namespace Myshop.services
             basket.BasketItems.Clear();
             basketContext.Commit();
         }
+
+        public List<BasketItemViewModel> GetBasketItemsDb(int id)
+        {
+            return basketContext.Collection().FirstOrDefault().BasketItems.Select( b => new BasketItemViewModel()
+            {
+                Id = b.Id,
+                ProductName = productContext.Find(b.ProductId).Name,
+                Image = productContext.Find(b.ProductId).Image,
+                Price = productContext.Find(b.ProductId).Price,
+                Quantity = b.Quantity,
+            }).ToList();
+        }
     }
 }
 
