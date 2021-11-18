@@ -9,46 +9,63 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th></th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)  
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
-        <th></th>
-    </tr>
+<div class="row">
+    <div class="col-md-12">
+        @(Html.Kendo().Grid<Myshop.Core.Models.Product>()
+                    .Name("productgrid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(c => c.Image).ClientTemplate("<img src='" + Url.Content("~/Content/Productimages/") + "#=Image#' alt='#=Image #' Title='#=Name #' height='62' width='62'/>").Width(50);
+                        columns.Bound(c => c.Name).Width(60).Title("ProductName");
+                        columns.Bound(c => c.Category).Width(60);
+                        columns.Bound(c => c.Description).Width(80);
+                        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(150);
+                    })
+                    //.ToolBar(toolbar => toolbar.Create())
+                    .Editable(editable => editable.Mode(GridEditMode.InLine).ConfirmDelete("Continue to delete this record?").DisplayDeleteConfirmation("Continue to delete this record?"))
+                    .Pageable()
+                    .Sortable()
+                    .Scrollable()
+                     .Pageable(pageable => pageable
+                                .Refresh(true)
+                                .PageSizes(true)
+                                .ButtonCount(5))
+                    .HtmlAttributes(new { style = "height:550px;" })
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .PageSize(20)
+                        .Events(events => events.Error("error_handler"))
+                        .Model(model => model.Id(p => p.Id))
+                        .Create(update => update.Action("create", "ProductManager"))
+                        .Read(read => read.Action("GetGridData", "ProductManager"))
+                        .Update(update => update.Action("Edit", "ProductManager"))
+                        .Destroy(update => update.Action("Delete", "ProductManager"))
+                    )
+        )
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            <img class="img-thumbnail" style="height:50px" src="@Url.Content("~/Content/ProductImages/"+item.Image+"")" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
 
-</table>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        // The Name() of the Grid is used to get its client-side instance.
+        var grid = $("#productgrid").data("kendoGrid");
+    });
+</script>
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>

@@ -1,5 +1,7 @@
-﻿using Myshop.core.Contracts;
+﻿using Microsoft.AspNet.Identity;
+using Myshop.core.Contracts;
 using Myshop.core.Models;
+using Myshop.core.ViewModels;
 using Myshop.services;
 using System;
 using System.Collections.Generic;
@@ -49,10 +51,10 @@ namespace MyShop.WebUI.Controllers
             return PartialView(basketSummary);
         }
         [Authorize]
-        public ActionResult CheckOut(int id)
+        public ActionResult CheckOut()
         {
             Customer customer = Customers.Collection().FirstOrDefault(c => c.Email == User.Identity.Name);
-            if(customer != null)
+            if (customer != null)
             {
                 Order order = new Order()
                 {
@@ -68,7 +70,7 @@ namespace MyShop.WebUI.Controllers
                 //order.BasketItems = basketService.GetBasketItemsDb(id);
                 return View(order);
             }
-           else
+            else
             {
                 return View(new Order());
                 //return RedirectToAction("Error");
@@ -98,6 +100,23 @@ namespace MyShop.WebUI.Controllers
         {
             //ViewBag.OrderId = OrderId;
             return View();
+        }
+        //[HttpPost]
+        //public ActionResult UpdateCartPrice(FormCollection Fc)
+        //{
+        //    string quantities = Fc.GetValues("quantity").FirstOrDefault();
+        //    string product_id = Fc.GetValues("product_id").FirstOrDefault();
+        //    List<BasketItem> cart = List<BasketItem>.Where(Model => Model.Price(from p in Model select p.Price * p.quantities)) and ( Model=>Model.Basket Total(from q in Model select q.Price * q.quantities)Sum();
+        //    for (int i = 0; i < cart.Count; i++)
+        //    {
+        //        cart[i].Quantity = Convert.ToInt32(quantities[i]); 
+        //    }
+        //    return View("Success");
+        //}
+        public ActionResult GetBasketItems()
+        {
+            List<BasketItemViewModel> basket = basketService.GetBasketItems(this.HttpContext);
+            return View(basket);
         }
     }
 }

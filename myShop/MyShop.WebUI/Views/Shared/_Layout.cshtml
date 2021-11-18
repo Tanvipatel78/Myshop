@@ -5,13 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+
+    <link href="~/Content/kendo/2021.3.1109/kendo.common-material.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2021.3.1109/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2021.3.1109/kendo.material.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2014.1.318/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2014.1.318/kendo.rtl.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2021.3.1109/kendo.default-main.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2014.1.318/kendo.default.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2021.3.1109/kendo.default-main.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2014.1.318/kendo.default.mobile.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2021.3.1109/kendo.common-material.min.css" rel="stylesheet" />
+    <link href="~/Scripts/kendo/all.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2021.3.1109/styles/kendo.bootstrap-v4.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://kendo.cdn.telerik.com/2021.3.1109/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2021.3.1109/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2021.3.1109/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2021.3.1109/js/kendo.aspnetmvc.min.js"></script>
 
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container" style="color:bisque;">
-            <div class="nav navbar-nav" >
+            <div class="nav navbar-nav">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -29,7 +47,7 @@
                     {
                         @*<li>@Html.ActionLink("Admin", "Index", "Admin")</li>*@
                         <li class="dropdown">
-                            <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Admin<span class="carousel-inner"></span></a>
+                            <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Admin<span class="carousel-inner" id="Kendodropdown"></span></a>
                             <ul class="dropdown-menu" role="menu" class="nav navbar-nav">
                                 <li>@Html.ActionLink("Product Categories", "Index", "ProductCategoryManager", null, new { @class = "list-group-item" })</li>
                                 <li>@Html.ActionLink("Product", "Index", "ProductManager", null, new { @class = "list-group-item" })</li>
@@ -40,7 +58,7 @@
                 </ul>
                 @Html.Partial("_LoginPartial")
                 @{
-                    Html.RenderAction("BasketSummary","Basket");
+                    Html.RenderAction("BasketSummary", "Basket");
                 }
             </div>
         </div>
@@ -56,5 +74,10 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="https://kendo.cdn.telerik.com/2021.3.1109/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2021.3.1109/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2021.3.1109/js/kendo.aspnetmvc.min.js"></script>
 </body>
 </html>
+
+

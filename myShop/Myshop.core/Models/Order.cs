@@ -24,5 +24,6 @@ namespace Myshop.core.Models
         public string OrderStatus { get; set; }
         public virtual ICollection<OrderItem> OrderItems{ get; set; }
         public IList<BasketItem> BasketItems{ get; set; }
+
     }
 }

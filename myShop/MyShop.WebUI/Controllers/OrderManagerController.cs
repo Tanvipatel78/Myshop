@@ -1,8 +1,15 @@
-﻿using Myshop.core.Contracts;
+﻿using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using Microsoft.Ajax.Utilities;
+using Myshop.core.Contracts;
 using Myshop.core.Models;
+using Myshop.core.ViewModels;
+using Myshop.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 
@@ -44,6 +51,16 @@ namespace MyShop.WebUI.Controllers
 
             return RedirectToAction("Index");
         }
-       
+        public ActionResult GetGridOrderData([DataSourceRequest] DataSourceRequest request)
+        {
+
+            return Json(GetOrderDetails().ToDataSourceResult(request));
+        }
+        private IEnumerable<Order> GetOrderDetails()
+        {
+            List<Order> data = orderService.GetOrderList();
+            return data;
+        }
+
     }
 }

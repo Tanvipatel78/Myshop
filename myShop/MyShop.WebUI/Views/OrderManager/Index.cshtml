@@ -1,46 +1,44 @@
 ﻿@model IEnumerable<Myshop.core.Models.Order>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SurName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderStatus)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="col-md-12">
+        @(Html.Kendo().Grid<Myshop.core.Models.Order>()
+    .Name("Ordergrid")
+    .Columns(columns =>
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SurName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderStatus)
-        </td>
-        <td>
-            @Html.ActionLink("Manage Order", "UpdateOrder", new { id = item.Id }) |
-        </td>
-    </tr>
-    }
-</table>
+    columns.Bound(c => c.FirstName).Width(40);
+    columns.Bound(c => c.SurName).Width(60).Title("LastName");
+    columns.Bound(c => c.Email).Width(40);
+    columns.Bound(c => c.City).Width(40);
+    columns.Bound(c => c.State).Width(40);
+    columns.Bound(c => c.ZipCode).Width(40);
+    columns.Bound(c => c.OrderStatus).Width(40);
+    //columns.Command(command => {command.Destroy(); }).Width(50);
+    columns.Template(@<text></text>)
+                                .ClientTemplate("<a href='" + Url.Action("UpdateOrder", "OrderManager") + "/#=Id#'><strong class='txtorder'>Manage Order</strong></a>").Width(40).Title("Action");
+        })
+                            .HtmlAttributes(new { style = "height: 550px;" })
+                            .Scrollable()
+                            .Groupable()
+                            .Sortable()
+                            .Pageable(pageable => pageable
+                                .Refresh(true)
+                                .PageSizes(true)
+                                .ButtonCount(5))
+                            .DataSource(dataSource => dataSource
+                                .Ajax()
+                                .Read(read => read.Action("GetGridOrderData", "OrderManager"))
+                                .PageSize(20)
+            )
+        )
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var grid = $("#Ordergrid").data("kendoGrid");
+    });
+</script>

@@ -1,4 +1,5 @@
-﻿using Myshop.core.Contracts;
+﻿using Microsoft.AspNet.Identity;
+using Myshop.core.Contracts;
 using Myshop.core.Models;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,19 @@ namespace MyShop.WebUI.Controllers
         {
             this.orderService = OrderService;
         }
-        // GET: OrderManager
+        [Authorize]
+        //GET: OrderManager
         public ActionResult Index()
         {
-            List<Order> Orders = orderService.GetOrderList();
+
+            List<Order> Orders = orderService.GetOrderList().Where(p => p.Email == User.Identity.GetUserName()).ToList();
+            return View(Orders);
+        }
+        [Authorize]
+        public ActionResult GetOrderdetails()
+        {
+
+            List<Order> Orders = orderService.GetOrderList().Where(p => p.Email == User.Identity.GetUserName()).ToList();
             return View(Orders);
         }
     }

@@ -65,5 +65,9 @@ namespace MyShop.WebUI.Controllers
 
             return View();
         }
+        public ActionResult KendoUIGrid()
+        {
+            return View();
+        }
     }
 }

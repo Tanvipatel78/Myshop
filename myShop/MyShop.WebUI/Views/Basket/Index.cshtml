@@ -8,62 +8,138 @@
 
 <th></th>
 
-@if ((from p in Model select p.Price * p.Quantity).Sum() != 0)
+@using (Html.BeginForm("UpdateCartPrice", "Basket", FormMethod.Post, new { encType = "multipart/form-data" }))
 {
-    <table class="table">
-        <tr>
-            <th></th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                Line Total
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td><img style="height:50px" class="img" src="~/Content/Productimages/@item.Image" /></td>
+    @Html.AntiForgeryToken()
+    if ((from p in Model select p.Price * p.Quantity).Sum() != 0)
+    {
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    Line Total
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr id="cartpage_@item.Id ">
+                    <td><img style="height:50px" class="img" src="~/Content/Productimages/@item.Image" /></td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @String.Format("{0:c}", item.Price)
-            </td>
-            <td>
-                @String.Format("{0:c}", item.Price * item.Quantity)
-            </td>
-            <td>
-                <a href="@Url.Action("RemoveFromBasket", "Basket", new { Id = item.Id })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete??')">Delete</a>
-            </td>
-        </tr>
-        }
-        <tr>
-            <td colspan="4" style="text-align:right"><strong>Basket Total</strong></td>
-            <td>
-                @String.Format("{0:c}", (from p in Model select p.Price * p.Quantity).Sum())
-            </td>
-            <td>
-                <a href="@Url.Action("CheckOut", "Basket")">Checkout</a>
-            </td>
-        </tr>
-    </table>
-    <a href="Home">Back to Shopping</a>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    @*<td class="cart-product-quantity" width="30px">
+                        <input type="hidden" class="product_Id" value="@item.Id" />
+                        <div class="input-group quantity">
+                            <div class="input-group-prepend decrement-btn changeQuantity" style="cursor: pointer">
+                                <span class="input-group-text">-</span>
+                            </div>
+                            <input type=@Html.DisplayFor(modelItem => item.Quantity) class="qty-input form-control" id="qut" maxlength="2" max="10" value="@item.Quantity">
+                            <div class="input-group-append increment-btn changeQuantity" style="cursor: pointer">
+                                <span class="input-group-text">+</span>
+                            </div>
+                        </div>
+                    </td>*@
+                    <td>
+                        @String.Format("{0:c}", item.Price)
+                    </td>
+                    <td>
+                        @String.Format("{0:c}", item.Price * item.Quantity)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("RemoveFromBasket", "Basket", new { Id = item.Id })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete??')">Delete</a>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="4" style="text-align:right"><strong>Basket Total</strong></td>
+                <td>
+                    @String.Format("{0:c}", (from p in Model select p.Price * p.Quantity).Sum())
+                </td>
+                <td>
+                    <a href="@Url.Action("CheckOut", "Basket")">Checkout</a>
+                </td>
+            </tr>
+        </table>
+        <a href="Home">Back to Shopping</a>
+    }
+
+    else
+    {
+        <h2>@*There is nothing in your cart!!*@</h2>
+        <Script>alert("There is Nothing in your cart!!")</Script>
+        <a href="Home">Back to Shopping</a>
+    }
 }
-else
-{
-    <h2>@*There is nothing in your cart!!*@</h2>
-    <Script>alert("There is Nothing in your cart!!")</Script>
-    <a href="Home">Back to Shopping</a>
-}
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $('.increment-btn').click(function (e) {
+            e.preventDefault();
+            var incre_value = $(this).parents('.quantity').find('.qty-input').val();
+            var value = parseInt(incre_value, 10);
+            value = isNaN(value) ? 0 : value;
+            if (value < 10) {
+                value++;
+                $(this).parents('.quantity').find('.qty-input').val(value);
+            }
+        });
+        $('.decrement-btn').click(function (e) {
+            e.preventDefault();
+            var decre_value = $(this).parents('.quantity').find('.qty-input').val();
+            var value = parseInt(decre_value, 10);
+            value = isNaN(value) ? 0 : value;
+            if (value >
+                1) {
+                value--;
+                $(this).parents('.quantity').find('.qty-input').val(value);
+            }
+        });
+
+    });
+
+    // Update Cart Data
+    $(document).ready(function () {
+
+        $('.changeQuantity').click(function (e) {
+            e.preventDefault();
+
+            var quantity = $(this).parent().find('#qut').val();
+            var product_id = $(this).parent().parent().find('.product_Id').val();
+
+            var data = {
+                //'_token': $('input[name=_token]').val(),
+                'quantity': quantity,
+                'product_id': product_id,
+            };
+
+            $.ajax({
+                url: '/Basket/UpdateCartPrice',
+                type: 'POST',
+                data: data,
+                success: function (response) {
+                    window.location.reload();
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.success(response.status);
+                }
+            });
+        });
+
+    });
+</script>

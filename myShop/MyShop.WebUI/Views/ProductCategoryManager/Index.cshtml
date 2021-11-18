@@ -3,31 +3,95 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="row">
+    <div class="col-md-12">
+        @(Html.Kendo().Grid<Myshop.Core.Models.Product>()
+                                                    .Name("Categorygrid")
+                                                    .Columns(columns =>
+                                                    {
+                                                //columns.Bound(c => c.Image).ClientTemplate("<img src='" + Url.Content("~/Content/Productimages/") + "#=Image#' alt='#=Image #' Title='#=Name #' height='62' width='62'/>").Width(50);
+                                                        columns.Bound(c => c.Category).Width(60).Title("Product Category");
+                                                        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(150);
+                                                    })
+                                                    .ToolBar(toolbar => toolbar.Create())
+                                                    .Editable(editable => editable.Mode(GridEditMode.InLine).ConfirmDelete("Continue to delete this record?").DisplayDeleteConfirmation("Continue to delete this record?"))
+                                                    .Pageable()
+                                                    .Sortable()
+                                                    .Scrollable()
+                                                     .Pageable(pageable => pageable
+                                                                .Refresh(true)
+                                                                .PageSizes(true)
+                                                                .ButtonCount(5))
+                                                    .HtmlAttributes(new { style = "height:550px;" })
+                                                    .DataSource(dataSource => dataSource
+                                                        .Ajax()
+                                                        .PageSize(20)
+                                                        .Events(events => events.Error("error_handler"))
+                                                        .Model(model => model.Id(p => p.Id))
+                                                        .Create(update => update.Action("create", "ProductCategoryManager"))
+                                                        .Read(read => read.Action("GetGridCategory", "ProductCategoryManager"))
+                                                        .Update(update => update.Action("Edit", "ProductCategoryManager"))
+                                                        .Destroy(update => update.Action("Delete", "ProductCategoryManager"))
+                                                    )
+        )
+    </div>
+</div>
 
-<h2>Index</h2>
+<script>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
-        <th></th>
-    </tr>
+    $(function () {
+        // The Name() of the Grid is used to get its client-side instance.
+        var grid = $("#Categorygrid").data("kendoGrid");
+    });
+</script>
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
 
-</table>
+@*@Scripts.Render("~/Scripts/KendoUIGrid/KendoGrid.js")
+    <div class="row">
+        <div class="col-md-12">
+            <div id="gridkendoUI">
+                <h2>Index</h2>
+
+                <p>
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Category)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>*@

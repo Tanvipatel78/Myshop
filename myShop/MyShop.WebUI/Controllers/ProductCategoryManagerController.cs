@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 using Myshop.core.Contracts;
 using Myshop.core.Models;
 using Myshop.DataAccess.inMemory;
@@ -109,5 +111,16 @@ namespace MyShop.WebUI.Controllers
                 return RedirectToAction("Index");
             }
         }
+        public ActionResult GetGridCategory([DataSourceRequest] DataSourceRequest request)
+        {
+
+            return Json(GetOrderDetails().ToDataSourceResult(request));
+        }
+        private IEnumerable<Productcategory> GetOrderDetails()
+        {
+            List<Productcategory> data = Context.Collection().ToList();
+            return data;
+        }
+
     }
 }
